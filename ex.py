@@ -1,63 +1,49 @@
 import sys
 import os
-from PyQt6.QtWidgets import (QApplication, QLabel, QPushButton, QVBoxLayout, QWidget, QStackedWidget, QFrame)
+from PyQt6.QtWidgets import (QApplication, QLabel, QPushButton, QVBoxLayout, 
+                             QWidget, QStackedWidget, QFrame, QSpacerItem, QSizePolicy)
 from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QPixmap
 
-class Teste(QFrame):
+class TelaWelcome(QFrame):
     def __init__(self, stack):
         super().__init__() 
         self.stack = stack 
-        
-        # Define o ID da TELA (self) para o QSS
         self.setObjectName("tela1")
-        
-        # Força o QFrame a aceitar o background do QSS
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         
         layout = QVBoxLayout()
         self.setLayout(layout)
         
+        # Spacers servem para empurrar o conteúdo para o centro vertical
+        layout.addSpacerItem(QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding))
+
         # 1. Texto de Boas-vindas
         self.label_titulo = QLabel('Bem-vindo')
         self.label_titulo.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_titulo.setObjectName("textowelcome")
-
-        # 2. Configuração da Imagem
-        self.image_label = QLabel(self)
-        self.image_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        
-        # Lógica para encontrar o caminho da imagem corretamente
-        diretorio_atual = os.path.dirname(os.path.abspath(__file__))
-        caminho_imagem = os.path.join(diretorio_atual, "img", "claquete.png")
-        
-        pixmap = QPixmap(caminho_imagem)
-        
-        if not pixmap.isNull():
-            self.image_label.setPixmap(pixmap.scaled(
-                100, 100, 
-                Qt.AspectRatioMode.KeepAspectRatio, 
-                Qt.TransformationMode.SmoothTransformation
-            ))
-        else:
-            self.image_label.setText("Imagem não encontrada")
-            print(f"Erro: Verifique se a imagem existe em: {caminho_imagem}")
-
-        # 3. Botão de entrada
-        self.botao = QPushButton('Entrar')
-        self.botao.setObjectName("botao_entrar") 
-        self.botao.setFixedSize(200, 50) 
-        self.botao.clicked.connect(self.irParaHome)
-
-        # ADICIONANDO OS WIDGETS AO LAYOUT (A ordem aqui define a posição na tela)
         layout.addWidget(self.label_titulo)
-        layout.addWidget(self.image_label)
+
+        # Pequeno subtítulo para preencher o espaço da imagem removida
+        self.subtitulo = QLabel('Editors Helper • Pro Version')
+        self.subtitulo.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.subtitulo.setStyleSheet("color: #666; font-size: 14px; margin-bottom: 20px;")
+        layout.addWidget(self.subtitulo)
+
+        # 2. Botão de entrada
+        self.botao = QPushButton('Entrar no Painel')
+        self.botao.setObjectName("botao_entrar") 
+        self.botao.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.botao.clicked.connect(self.irParaHome)
         layout.addWidget(self.botao, alignment=Qt.AlignmentFlag.AlignCenter)
 
+        layout.addSpacerItem(QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding))
+
     def irParaHome(self):
+        # Transição de tamanho para o padrão 1000x500
+        self.stack.setFixedSize(1000, 500)
         self.stack.setCurrentIndex(1)
 
-class Teste2(QWidget):
+class TelaHome(QWidget):
     def __init__(self):
         super().__init__() 
         self.setObjectName("tela2")
@@ -66,9 +52,8 @@ class Teste2(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
 
-        label = QLabel('Você trocou de tela! (Tela 2)')
+        label = QLabel('Painel Principal')
         label.setAlignment(Qt.AlignmentFlag.AlignCenter) 
-
         layout.addWidget(label)
 
 def main():
@@ -81,20 +66,18 @@ def main():
     try:
         with open(caminho_qss, "r", encoding="utf-8") as file:
             app.setStyleSheet(file.read())
-            print("Estilo carregado com sucesso!")
     except FileNotFoundError:
-        print(f"Aviso: Arquivo {caminho_qss} não encontrado. Usando estilo padrão.")
+        print("Aviso: Arquivo style.qss não encontrado.")
 
-    # Configuração do Stack
+    # Configuração do Stack (Janela Principal)
     main_stack = QStackedWidget()
     main_stack.setWindowTitle('Editors Helper')
-    main_stack.setFixedSize(1000, 600) 
+    
+    # Tamanho inicial da Welcome (Pequena)
+    main_stack.setFixedSize(800, 400) 
 
-    tela1 = Teste(main_stack)
-    tela2 = Teste2()
-
-    main_stack.addWidget(tela1) # Índice 0
-    main_stack.addWidget(tela2) # Índice 1
+    main_stack.addWidget(TelaWelcome(main_stack)) # Índice 0
+    main_stack.addWidget(TelaHome())              # Índice 1
 
     main_stack.show()
     sys.exit(app.exec())

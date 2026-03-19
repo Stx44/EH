@@ -1,20 +1,54 @@
 #tela1 {
-    border-image: url("img/bckg.jpg") 0 0 0 0 stretch stretch;
+    background-color: #0f0f11; 
+    border: 1px solid #252527; 
 }
 
-#textowelcome{
-    font-size: 100px;
-    color: rgb(1, 75, 147);
-    font-family: "Montserrat";
-    text-shadow: black 3px;
+#textowelcome {
+    color: #ffffff;
+    font-family: "Inter", "Segoe UI", sans-serif;
+    font-size: 54px;
+    font-weight: 900;
+    letter-spacing: -2px; 
+    background: transparent;
 }
 
-#botao_entrar{
-    background-color: rgb(1, 75, 147);
-    color: white;
-    width: 200px;
-    height: 40px;
-    border-radius: 10px;
-    font-family: "Montserrat";
+#botao_entrar {
+    color: #ffffff;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #2b2b2d, stop:1 #1a1a1c);
+    border: 1px solid #3a3a3c;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    min-width: 180px;
+    min-height: 40px;
+    margin-top: 10px;
+}
+
+/* Efeito de aumento no hover através de padding e brilho */
+#botao_entrar:hover {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
+                                stop:0 #3a3a3c, stop:1 #252527);
+    border: 1px solid #4a4a4c;
+    /* Aumenta levemente a percepção de tamanho */
     font-size: 15px;
+    color: #0078d4; /* Azul sutil no texto ao passar o mouse */
+}
+
+#botao_entrar:pressed {
+    background-color: #111112;
+    padding-top: 2px;
+}
+
+/* --- TELA 2: HOME (1000x500) --- */
+
+#tela2 {
+    background-color: #09090a; /* Tom ainda mais profundo */
+}
+
+#tela2 QLabel {
+    color: #606063;
+    font-family: "Segoe UI";
+    font-size: 24px;
+    font-weight: 300;
 }
