@@ -1,54 +1,79 @@
-#tela1 {
-    background-color: #0f0f11; 
-    border: 1px solid #252527; 
+/* --- TELA WELCOME --- */
+#tela1 { background-color: #050505; }
+#textowelcome { color: #ffffff; font-size: 60px; font-weight: 900; letter-spacing: -3px; }
+#subtitulo { color: #444; font-size: 11px; font-weight: bold; letter-spacing: 2px; }
+#botao_entrar {
+    color: #000; background-color: #D4AF37; border-radius: 4px;
+    font-weight: 800; font-size: 13px; min-width: 200px; min-height: 45px; margin-top: 30px; border: none;
+}
+#botao_entrar:hover { background-color: #f1c40f; }
+
+/* --- HOME E SIDEBAR --- */
+#tela2 { background-color: #0a0a0a; }
+#sidebar { background-color: #0d0d0d; border-right: 1px solid #1a1a1a; }
+
+QPushButton[class="btn_sidebar"] {
+    color: #555; background-color: transparent; border: none;
+    border-left: 3px solid transparent; padding: 15px 25px;
+    text-align: left; font-size: 11px; font-weight: bold; letter-spacing: 1px;
+}
+QPushButton[class="btn_sidebar"]:hover { color: #D4AF37; background-color: #151515; }
+QPushButton[class="btn_sidebar"]:checked {
+    background-color: #1a1a1a; color: #D4AF37; border-left: 3px solid #D4AF37;
 }
 
-#textowelcome {
-    color: #ffffff;
-    font-family: "Inter", "Segoe UI", sans-serif;
-    font-size: 54px;
-    font-weight: 900;
-    letter-spacing: -2px; 
+/* --- TELA DE PLUGINS (FIX FUNDO CINZA) --- */
+#pagina_interna, #stack_paginas { background-color: #0a0a0a; border: none; }
+
+#scroll_plugins { background-color: transparent; border: none; }
+#scroll_plugins QWidget#qt_scrollarea_viewport { background-color: transparent; }
+#container_plugins { background-color: #0a0a0a; }
+
+#titulo_pagina { color: #D4AF37; font-size: 18px; font-weight: bold; margin-bottom: 20px; }
+
+/* CARDS PREMIUM */
+#card_item { background-color: #111111; border: 1px solid #1a1a1a; border-radius: 8px; }
+#card_item:hover { background-color: #161616; border-color: #222; }
+
+#plugin_nome_label { color: #D4AF37; font-size: 15px; font-weight: bold; }
+#plugin_desc_label { color: #777; font-size: 11px; }
+
+#btn_acao_plugin {
+    background-color: transparent; color: #D4AF37;
+    border: 1.5px solid #D4AF37; border-radius: 4px;
+    font-size: 10px; font-weight: 800;
+}
+#btn_acao_plugin:hover { background-color: #D4AF37; color: #000; }
+
+/* SCROLLBAR CUSTOM */
+QScrollBar:vertical { border: none; background: #0d0d0d; width: 10px; }
+QScrollBar::handle:vertical { background: #252525; min-height: 30px; border-radius: 5px; }
+QScrollBar::handle:vertical:hover { background: #D4AF37; }
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0px; }
+
+#card_software {
+    background-color: #111;
+    border: 1px solid #1a1a1a;
+    border-radius: 20px;
+}
+
+#card_software:hover {
+    background-color: #151515;
+    margin: -3px; 
+}
+
+#label_software_btn {
+    color: #666;
+    font-size: 11px;
+    font-weight: bold;
     background: transparent;
 }
 
-#botao_entrar {
-    color: #ffffff;
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #2b2b2d, stop:1 #1a1a1c);
-    border: 1px solid #3a3a3c;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: bold;
-    min-width: 180px;
-    min-height: 40px;
-    margin-top: 10px;
-}
 
-/* Efeito de aumento no hover através de padding e brilho */
-#botao_entrar:hover {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1, 
-                                stop:0 #3a3a3c, stop:1 #252527);
-    border: 1px solid #4a4a4c;
-    /* Aumenta levemente a percepção de tamanho */
-    font-size: 15px;
-    color: #0078d4; /* Azul sutil no texto ao passar o mouse */
+/* ESTILO DA SIDEBAR (O que você já tinha) */
+#sidebar { background-color: #000; border-right: 1px solid #111; }
+QPushButton[class="btn_sidebar"] {
+    color: #444; background: transparent; border: none; padding: 15px; 
+    text-align: left; font-weight: bold; font-size: 11px;
 }
-
-#botao_entrar:pressed {
-    background-color: #111112;
-    padding-top: 2px;
-}
-
-/* --- TELA 2: HOME (1000x500) --- */
-
-#tela2 {
-    background-color: #09090a; /* Tom ainda mais profundo */
-}
-
-#tela2 QLabel {
-    color: #606063;
-    font-family: "Segoe UI";
-    font-size: 24px;
-    font-weight: 300;
-}
+QPushButton[class="btn_sidebar"]:checked { color: #D4AF37; background: #0f0f0f; border-left: 3px solid #D4AF37; }
