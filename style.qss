@@ -55,11 +55,12 @@ QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0px; }
     background-color: #111;
     border: 1px solid #1a1a1a;
     border-radius: 20px;
+    margin: 10px;
 }
 
 #card_software:hover {
     background-color: #151515;
-    margin: -3px; 
+    padding: 3px;
 }
 
 #label_software_btn {
