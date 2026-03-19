@@ -1,0 +1,20 @@
+#tela1 {
+    border-image: url("img/bckg.jpg") 0 0 0 0 stretch stretch;
+}
+
+#textowelcome{
+    font-size: 100px;
+    color: rgb(1, 75, 147);
+    font-family: "Montserrat";
+    text-shadow: black 3px;
+}
+
+#botao_entrar{
+    background-color: rgb(1, 75, 147);
+    color: white;
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    font-family: "Montserrat";
+    font-size: 15px;
+}
