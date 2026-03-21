@@ -5,7 +5,7 @@ from PyQt6.QtWidgets import (QApplication, QLabel, QPushButton, QVBoxLayout, QHB
 from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QIcon, QPixmap
 
-# --- TELA DE PLUGINS ---
+
 class PaginaPlugins(QFrame):
     def __init__(self):
         super().__init__()
@@ -135,6 +135,81 @@ class PaginaSoftware(QFrame):
         layout_principal.addLayout(grade)
         layout_principal.addStretch()
 
+
+class PaginaPresets(QFrame): # Mudei para QFrame para seguir o padrão das outras
+    def __init__(self):
+        super().__init__()
+        self.setObjectName("pagina_interna")
+        
+        # Layout principal da página
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(40, 40, 40, 40)
+        layout.setSpacing(15)
+        # Alinha o conteúdo no Topo e Centro conforme você pediu
+        layout.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignHCenter)
+        
+        titulo = QLabel("GERENCIADOR DE PRESETS")
+        titulo.setObjectName("titulo_pagina")
+        layout.addWidget(titulo)
+
+        # Scroll Area para os cards
+        scroll = QScrollArea()
+        scroll.setObjectName("scroll_plugins")
+        scroll.setWidgetResizable(True)
+        
+        container_widget = QWidget()
+        container_widget.setObjectName("container_plugins")
+        container_widget.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
+        
+        container_layout = QVBoxLayout(container_widget)
+        container_layout.setContentsMargins(0, 0, 15, 0)
+        container_layout.setSpacing(10)
+
+        # LISTA CORRIGIDA (Agora com todas as chaves para não dar KeyError)
+        meus_presets = [
+            {"nome": "Preset de Shake", "versao": "v1.0", "desc": "Efeito de tremor suave."},
+            {"nome": "Preset de Texto", "versao": "v2.1", "desc": "Animações de entrada/saída."},
+            {"nome": "Preset de Twixtor", "versao": "v1.5", "desc": "Configurações de Slow Motion."},
+            {"nome": "Preset de One Frames", "versao": "v1.0", "desc": "Flash branco de 1 frame."},
+            {"nome": "Preset de Transições", "versao": "v3.0", "desc": "Pack de transições variadas."},
+            {"nome": "Preset de CC", "versao": "v4.2", "desc": "Color Correction cinematográfico."},
+        ]
+
+        for preset in meus_presets:
+            card = QFrame()
+            card.setObjectName("card_item")
+            h_layout = QHBoxLayout(card)
+            h_layout.setContentsMargins(25, 20, 25, 20)
+            
+            info_vbox = QVBoxLayout()
+            info_vbox.setSpacing(4)
+            
+            nome_label = QLabel(preset["nome"])
+            nome_label.setObjectName("plugin_nome_label")
+            
+            # Aqui estava o erro! Agora 'versao' e 'desc' existem na lista acima.
+            desc_text = f"{preset['versao']} • {preset['desc']}"
+            desc_label = QLabel(desc_text)
+            desc_label.setObjectName("plugin_desc_label")
+            
+            info_vbox.addWidget(nome_label)
+            info_vbox.addWidget(desc_label)
+            
+            btn = QPushButton("BAIXAR") # Alterado para fazer mais sentido em presets
+            btn.setObjectName("baixar")   # Usando o ID que você criou no QSS
+            btn.setFixedSize(100, 35)
+            btn.setCursor(Qt.CursorShape.PointingHandCursor)
+
+            h_layout.addLayout(info_vbox)
+            h_layout.addStretch()
+            h_layout.addWidget(btn)
+            container_layout.addWidget(card)
+
+        container_layout.addStretch()
+        scroll.setWidget(container_widget)
+        layout.addWidget(scroll)
+
+
 # --- TELAS DE TRANSIÇÃO ---
 class TelaWelcome(QFrame):
     def __init__(self, stack):
@@ -187,7 +262,7 @@ class TelaHome(QWidget):
         self.paginas_internas = QStackedWidget()
         self.paginas_internas.setObjectName("stack_paginas")
 
-        self.telas = [PaginaPlugins(), PaginaSoftware(), QLabel("PRESETS"), QLabel("TUTORIAIS")]
+        self.telas = [PaginaPlugins(), PaginaSoftware(), PaginaPresets(), QLabel("TUTORIAIS")]
         nomes = ["PLUGINS", "SOFTWARES", "PRESETS", "TUTORIAIS"]
 
         for i, tela in enumerate(self.telas):
