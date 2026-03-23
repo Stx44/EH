@@ -98,3 +98,8 @@ QPushButton[class="btn_sidebar"]:checked { color: #D4AF37; background: #0f0f0f; 
     background-color: #D4AF37;
      color: #000
 }
+
+#Titulo_tuto{
+    font-size: 20px;
+    color: white;
+}

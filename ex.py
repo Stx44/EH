@@ -136,7 +136,7 @@ class PaginaSoftware(QFrame):
         layout_principal.addStretch()
 
 
-class PaginaPresets(QFrame): # Mudei para QFrame para seguir o padrão das outras
+class PaginaPresets(QFrame): 
     def __init__(self):
         super().__init__()
         self.setObjectName("pagina_interna")
@@ -209,8 +209,24 @@ class PaginaPresets(QFrame): # Mudei para QFrame para seguir o padrão das outra
         scroll.setWidget(container_widget)
         layout.addWidget(scroll)
 
+class PaginaTutoriais(QFrame):
+    def __init__(self):
+        super().__init__()
+        self.setObjectName("pagina_interna")
+        h_layout = QVBoxLayout(self)
+        h_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        h_layout.setContentsMargins(40, 40, 40, 40)
+        h_layout.setSpacing(15)
 
-# --- TELAS DE TRANSIÇÃO ---
+        titulo = QLabel("Ajuda para iniciantes")
+        titulo.setObjectName("Titulo_tuto")
+        titulo.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+
+        h_layout.addWidget(titulo)
+
+        
+
+
 class TelaWelcome(QFrame):
     def __init__(self, stack):
         super().__init__() 
@@ -262,7 +278,7 @@ class TelaHome(QWidget):
         self.paginas_internas = QStackedWidget()
         self.paginas_internas.setObjectName("stack_paginas")
 
-        self.telas = [PaginaPlugins(), PaginaSoftware(), PaginaPresets(), QLabel("TUTORIAIS")]
+        self.telas = [PaginaPlugins(), PaginaSoftware(), PaginaPresets(), PaginaTutoriais()]
         nomes = ["PLUGINS", "SOFTWARES", "PRESETS", "TUTORIAIS"]
 
         for i, tela in enumerate(self.telas):
