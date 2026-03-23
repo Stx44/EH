@@ -195,7 +195,7 @@ class PaginaPresets(QFrame): # Mudei para QFrame para seguir o padrão das outra
             info_vbox.addWidget(nome_label)
             info_vbox.addWidget(desc_label)
             
-            btn = QPushButton("BAIXAR") # Alterado para fazer mais sentido em presets
+            btn = QPushButton("INSTALAR") # Alterado para fazer mais sentido em presets
             btn.setObjectName("baixar")   # Usando o ID que você criou no QSS
             btn.setFixedSize(100, 35)
             btn.setCursor(Qt.CursorShape.PointingHandCursor)
